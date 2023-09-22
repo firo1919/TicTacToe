@@ -42,7 +42,7 @@ public class TicTacToe extends JFrame implements ActionListener {
     }
 
     public static boolean diag(ArrayList<Mybutton> board, int index, Mybutton clickedButton) {
-        if (isEven(index) || index == 0) {
+        if (isEven(index)) {
             return ((board.get(0).same(board.get(4))) &&
                     (board.get(8).same(board.get(4)))) ||
                     ((board.get(2).same(board.get(4))) &&
@@ -124,17 +124,19 @@ public class TicTacToe extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Mybutton clickedButton = (Mybutton) e.getSource();
+        if(!clickedButton.clicked()){
         if (isEven(count)) {
             clickedButton.myseticon("xmark.jpg");
         } else {
             clickedButton.myseticon("Omark.jpg");
         }
-        if (win(buttons, buttons.indexOf(clickedButton), clickedButton)) {
+         if (win(buttons, buttons.indexOf(clickedButton), clickedButton)) {
             display(clickedButton);
         } else if (count == 8) {
             display(clickedButton, true);
         }
-        count += 1;
+        clickedButton.setclicked();
+         count+=1;}
     }
 
     public static void main(String[] args) {
