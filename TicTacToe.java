@@ -8,7 +8,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         if (num % 2 == 0) return true;
         return false;
     }
-
+// to determine a win across a row
     public static boolean row(ArrayList<Mybutton> board, int index, Mybutton clickedButton) {
         boolean allEqual = true;
         int i;
@@ -24,7 +24,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
         return allEqual;
     }
-
+// to determine a win across a column
     public static boolean col(ArrayList<Mybutton> board, int index, Mybutton clickedButton) {
         boolean allEqual = true;
         int i;
@@ -40,7 +40,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
         return allEqual;
     }
-
+// to determine a win across a diagonal
     public static boolean diag(ArrayList<Mybutton> board, int index, Mybutton clickedButton) {
         if (isEven(index)) {
             return ((board.get(0).same(board.get(4))) &&
@@ -50,24 +50,23 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
         return false;
     }
-
+//overall win
     public static boolean win(ArrayList<Mybutton> board, int index, Mybutton clickedButton) {
         if (row(board, index, clickedButton) || col(board, index, clickedButton) || diag(board, index, clickedButton)) {
             return true;
         }
         return false;
     }
-
-    public static int count = 0;
+    public static int count = 0;// counter for clicks
     ArrayList<Mybutton> buttons;
     Font myfont = new Font("ink font", Font.BOLD, 30);
-    static JPanel panel;
+    static JPanel panel;// panel for setting the buttons
     ImageIcon winner = new ImageIcon("win.jpg");
     ImageIcon labelicon = new ImageIcon("labeltic.jpg");
     ImageIcon sadicon = new ImageIcon("sad.jpg");
     JLabel label1;
     TicTacToe() {
-        buttons = new ArrayList<>(9);
+        buttons = new ArrayList<>(9);//buttons
         panel = new JPanel();
         panel.setBounds(50, 10, 500, 500);
         panel.setLayout(new GridLayout(3, 3, 10, 10));
@@ -77,6 +76,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         label1.setHorizontalAlignment(JLabel.LEFT);
         label1.setBounds(50, 505, 500, 150);
         label1.setOpaque(true);
+// adding buttons to panel
         for (int i = 0; i < 9; i++) {
             buttons.add(new Mybutton());
             buttons.get(i).addActionListener(this);
@@ -84,6 +84,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
         ImageIcon background = new ImageIcon("tictac.jpg");
         JLabel backgroundLabel = new JLabel(background);
+// setting up JFrame
         backgroundLabel.setSize(new Dimension(super.getWidth(), super.getHeight()));
         super.setContentPane(backgroundLabel);
         super.setLayout(null);
@@ -96,7 +97,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         super.add(label1);
         super.setVisible(true);
     }
-
+// display content for when the game ends by a win or draw
     public void display(Mybutton clickedButton) {
         int selectedOption =  JOptionPane.showOptionDialog(null, "Congratulations you have won!!!, Do u want to play again", null,JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, winner, null, 0);
         if(selectedOption==1){
@@ -120,7 +121,7 @@ public class TicTacToe extends JFrame implements ActionListener {
             new TicTacToe();
         }
     }
-
+// action listner implementation
     @Override
     public void actionPerformed(ActionEvent e) {
         Mybutton clickedButton = (Mybutton) e.getSource();
