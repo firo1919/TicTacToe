@@ -61,9 +61,9 @@ public class TicTacToe extends JFrame implements ActionListener {
     ArrayList<Mybutton> buttons;
     Font myfont = new Font("ink font", Font.BOLD, 30);
     static JPanel panel;// panel for setting the buttons
-    ImageIcon winner = new ImageIcon("win.jpg");
-    ImageIcon labelicon = new ImageIcon("labeltic.jpg");
-    ImageIcon sadicon = new ImageIcon("sad.jpg");
+    ImageIcon winner = new ImageIcon("images/win.jpg");
+    ImageIcon labelicon = new ImageIcon("images/labeltic.jpg");
+    ImageIcon sadicon = new ImageIcon("images/sad.jpg");
     JLabel label1;
     TicTacToe() {
         buttons = new ArrayList<>(9);//buttons
@@ -82,20 +82,20 @@ public class TicTacToe extends JFrame implements ActionListener {
             buttons.get(i).addActionListener(this);
             panel.add(buttons.get(i));
         }
-        ImageIcon background = new ImageIcon("tictac.jpg");
+        ImageIcon background = new ImageIcon("images/tictac.jpg");
         JLabel backgroundLabel = new JLabel(background);
 // setting up JFrame
         backgroundLabel.setSize(new Dimension(super.getWidth(), super.getHeight()));
-        super.setContentPane(backgroundLabel);
-        super.setLayout(null);
-        super.setSize(600, 700);
-        super.setLocationRelativeTo(null);
-        super.setTitle("TicTacToe");
-        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        super.setResizable(false);
-        super.add(panel);
-        super.add(label1);
-        super.setVisible(true);
+        setContentPane(backgroundLabel);
+        setLayout(null);
+        setSize(600, 700);
+        setLocationRelativeTo(null);
+        setTitle("TicTacToe");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        add(panel);
+        add(label1);
+        setVisible(true);
     }
 // display content for when the game ends by a win or draw
     public void display(Mybutton clickedButton) {
@@ -121,15 +121,17 @@ public class TicTacToe extends JFrame implements ActionListener {
             new TicTacToe();
         }
     }
-// action listner implementation
+// action listener implementation
     @Override
     public void actionPerformed(ActionEvent e) {
         Mybutton clickedButton = (Mybutton) e.getSource();
         if(!clickedButton.clicked()){
         if (isEven(count)) {
-            clickedButton.myseticon("xmark.jpg");
+            clickedButton.myseticon("images/xmark.jpg");
+            clickedButton.setLetter("X");
         } else {
-            clickedButton.myseticon("Omark.jpg");
+            clickedButton.myseticon("images/Omark.jpg");
+            clickedButton.setLetter("O");
         }
          if (win(buttons, buttons.indexOf(clickedButton), clickedButton)) {
             display(clickedButton);
